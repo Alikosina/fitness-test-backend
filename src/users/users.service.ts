@@ -1,14 +1,14 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from './user.entity';
+import { Users} from './user.entity';
 import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class UsersService {
     constructor(
-        @InjectRepository(User)
-        private readonly userRepository: Repository<User>,
+        @InjectRepository(Users)  // user //,
+        private readonly userRepository: Repository<Users>,
     ) {}
 
     private async comparePasswords(
@@ -18,7 +18,7 @@ export class UsersService {
         return await bcrypt.compare(currentPassword, userPassword);
     }
 
-    async findOneByUsername(username: string): Promise<User | undefined> {
+    async findOneByUsername(username: string): Promise<Users | undefined> {
         return this.userRepository.findOne({ where: { username } });
     }
 
@@ -28,7 +28,7 @@ export class UsersService {
     }: {
         username: string;
         password: string;
-    }): Promise<User> {
+    }): Promise<Users> {
         const user = await this.findOneByUsername(username);
 
         if (!user) {
@@ -53,7 +53,7 @@ export class UsersService {
     }: {
         username: string;
         password: string;
-    }): Promise<User> {
+    }): Promise<Users> {
         const userInDb = await this.findOneByUsername(username);
         if (userInDb) {
             throw new HttpException(
@@ -62,7 +62,7 @@ export class UsersService {
             );
         }
 
-        const user: User = this.userRepository.create({
+        const user: Users = this.userRepository.create({
             username,
             password,
         });

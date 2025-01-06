@@ -15,7 +15,7 @@ import { fromHash, toHash } from './password.transformer';
 
 @Exclude()
 @Entity()
-export class User extends BaseEntity {
+export class Users extends BaseEntity {
   constructor(args: any = {}) {
     super();
     Object.assign(this, args);
