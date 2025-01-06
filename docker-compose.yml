@@ -1,0 +1,20 @@
+# version: "3.9"
+# services:
+#   postgres:
+#     image: postgres:13.3
+#     environment:
+#       POSTGRES_DB: "fitness_test"
+#       POSTGRES_USER: "fitadmin"
+#       POSTGRES_PASSWORD: "fitpassword"
+#     ports:
+#       - "5432:5432"
+version: "3.9"
+services:
+  postgres:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "fit_db"
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
