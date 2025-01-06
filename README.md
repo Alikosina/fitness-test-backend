@@ -1,3 +1,5 @@
+# !Fitness Test Backend
+
 ## Setup
 
 1. Create `.env` using `.env.example`
